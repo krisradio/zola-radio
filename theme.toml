@@ -1,0 +1,19 @@
+name = "radio"
+description = "A minimalist portfolio theme."
+license = "MIT"
+min_version = "0.5.0"
+
+[extra]
+radio_logo = ""
+radio_nav_links = [
+    {url = "/", name = "ROOT/"},
+    {url = "https://github.com/krisradio/zola-radio", name = "Get Radio"}
+]
+
+[author]
+name= "Kris Keillor"
+homepage = "krisrad.io"
+
+[original]
+name = "Vincent Prouillet"
+homepage = "https://www.vincentprouillet.com"

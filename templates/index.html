@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="nav-visible">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <!-- viewport-fit=cover is to support iPhone X rounded corners and notch in landscape-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+
+      <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+
+      <!-- CSS -->
+      <link rel="stylesheet" href="{{ get_url(path="radio.css", trailing_slash=false) }}">
+
+      {% if config.generate_rss %}
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+      {% endif %}
+
+      {% block extra_head %}
+      {% endblock extra_head %}
+    </head>
+
+    <body>
+        {% block sidebar %}
+            <nav>
+                <ul>
+                    {% block nav_links %}
+                        {% for link in config.extra.radio_nav_links %}
+                            <li><a href="{{link.url}}">{{link.name}}</a></li>
+                        {% endfor %}
+                    {% endblock nav_links %}
+                </ul>
+                {% block nav_about %}
+                <div class="nav-about">
+                    {% if config.extra.radio_logo != "" %}<img src="{{ config.extra.radio_logo }}" class="logo-img"/>{% endif %}
+                    {% if config.description != "" %}<p>{{ config.description }}</p>{% endif %}
+                </div>
+                {% endblock nav_about %}
+            </nav>
+        {% endblock sidebar %}
+
+        <div id="main">
+            <div id="menu-bar">
+                <div class="buttons">
+                    <button id="nav-toggle" class="menu-button " type="button" title="Toggle Menu" aria-label="Toggle Table of Contents" aria-controls="sidebar"> ☰ </button>
+                    <button id="search-toggle" class="menu-button" type="button" title="Search not yet enabled." aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar"> … </button>
+                </div>
+                <h1>{{ config.title }}</h1> 
+                <div class="buttons"></div>
+            </div>
+            
+            <div id="content">
+                <!-- idea: move search to menu bar -->
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+            {% block content %}
+                    {% for page in section.pages | sort(attribute="date") | reverse %}
+                      <div class="post">
+                        <h1 class="post-title">
+                          <a href="{{ page.permalink }}">
+                            {{ page.title }}
+                          </a>
+                        </h1>
+                        <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+                      </div>
+                    {% endfor %}
+                </div>
+            {% endblock content %}
+        </div>
+        <script src="/scripts/nav.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>
