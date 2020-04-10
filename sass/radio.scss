@@ -6,7 +6,7 @@
  *               \/       \/   Zola Theme        
  *
  * * * * * Designed by @krisradio. * * * * *
- */ 
+ */
 
 /* Contents
  *
@@ -21,17 +21,23 @@
  * Update page-wide styling.
  */
 html    { font-family: "PT Sans", Helvetica, Arial, sans-serif; }
+.hidden { display: none; }
+a       { color: #2b79a2; }
+
+* {
+  box-sizing: border-box;
+}
+
 :root   { 
   --nav-width: 300px;
   --content-max-width: 750px;
 }
+
 body    { 
   margin: 0;
   background-color: #131516;
   color: #98a3ad;
 }
-.hidden { display: none; }
-a       { color: #2b79a2; }
 
 /* Logo-img 
  * Used in both the nav pane and about pages.
@@ -57,9 +63,7 @@ nav {
   left: 0;
   bottom: 0;
   width: var(--nav-width);
-  padding: 50px 1rem;
-  
-  transition: transform 0.3s;
+  padding: 0.5rem 2rem;
 }
 
 nav a {
@@ -74,15 +78,6 @@ nav ul {
 
 nav li:hover, nav li:focus { text-decoration: underline; }
 nav li:active { font-weight: bold; }
-
-/* nav animation 
- * Slide the nav pane in/out when shown/hidden. 
- */
- 
-.js nav, #main      { transition: transform 0.3s, margin 0.3s; }
-.nav-hidden nav     { transform: translateX(calc(0px - var(--nav-width) - 2rem)); }
-.nav-visible #main  { margin-left: calc(var(--nav-width) + 2rem); }
-.nav-hidden #main   { transform: translateX(0); }
 
 /* nav-about 
  * "nav-about" class sticks to the bottom of the nav bar. 
@@ -116,18 +111,30 @@ nav li:active { font-weight: bold; }
 
 #menu-bar button {
   position: relative;
-  margin: 5px 0px 5px 5px;
+  margin: 5px;
   padding: 0em 1em;
   z-index: 10;
   cursor: pointer;
   transition: color 0.5s;
+  background-color: #131516;
+  color: #98a3ad;
   border: none;
   line-height: 40px;
 }
 
-#search-toggle:hover {
+#menu-bar button:hover {
+  color: #2b79a2;
+}
+
+#search-toggle {
   /* TODO: Implement Search */
-  cursor: not-allowed;
+  display: none;
+}
+
+/* Main
+ */
+#main {
+  margin-left: 300px;
 }
 
 /* Content 
