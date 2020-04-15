@@ -9,6 +9,7 @@ radio_nav_links = [
     {url = "/", name = "ROOT/"},
     {url = "https://github.com/krisradio/zola-radio", name = "Get Radio"}
 ]
+section_col = 3
 
 [author]
 name= "Kris Keillor"

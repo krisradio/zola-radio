@@ -65,18 +65,19 @@
                 </div>
 
             {% block content %}
-                    {% for page in section.pages | sort(attribute="date") | reverse %}
-                      <div class="post">
-                        <h1 class="post-title">
-                          <a href="{{ page.permalink }}">
-                            {{ page.title }}
-                          </a>
-                        </h1>
-                        <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
-                      </div>
-                    {% endfor %}
-                </div>
+                {% for page in section.pages | sort(attribute="date") | reverse %}
+                  <div class="post">
+                    <h1 class="post-title">
+                      <a href="{{ page.permalink }}">
+                        {{ page.title }}
+                      </a>
+                    </h1>
+                    <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+                  </div>
+                {% endfor %}
             {% endblock content %}
+
+            </div>
         </div>
         <script src="/scripts/nav.js" type="text/javascript" charset="utf-8"></script>
     </body>

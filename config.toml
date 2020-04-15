@@ -4,6 +4,8 @@ title = "Radio"
 description = "A minimalist portfolio theme"
 
 [extra]
+radio_logo = ""
 radio_nav_links = [
     {url = "https://github.com/krisradio/zola-radio", name = "GitHub"},
 ]
+section_col = 3
