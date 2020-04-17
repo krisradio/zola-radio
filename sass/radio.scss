@@ -22,7 +22,7 @@
  * Update page-wide styling.
  */
 html    { font-family: "PT Sans", Helvetica, Arial, sans-serif; }
-.hidden { display: none; }
+.hidden { display: hidden; }
 a       { color: #2b79a2; }
 
 * {
@@ -141,7 +141,6 @@ nav li:active { font-weight: bold; }
 /* Content 
  */
 #content {
-  text-align: justify;
   margin-left: auto;
   margin-right: auto;
   max-width: var(--content-max-width);
@@ -149,15 +148,62 @@ nav li:active { font-weight: bold; }
 
 /* Sections 
  */
-.section {
+.column {
+  box-sizing: border-box;
+  width: 30.33%;
+  margin: 0 1.5%;
+  float: left;
 }
 
-.section h1 {
-    display: block;
-    clear: both;
+.column a {
+  color: #98a3ad;
+  text-decoration: none;
 }
 
 .sub {
-    display: inline-block;
-    max-width: 33%;
+  display: block;
+  margin: 1em 0em;
+  padding: 1em 1em;
+  background-image: linear-gradient(#272727, #131516)
+}
+
+.sub > h2 {
+  position: relative;
+  transition: top 0.3s;
+  margin: 0em;
+}
+
+.sub > span {
+  position: relative;
+}
+
+.sub > span.hide {
+  display: inline-block;
+  //transform: translateY(100%);
+  overflow: none;
+  //visibility: hidden;
+  opacity: 0%;
+}
+
+.sub > span.flash {
+  animation: 0.45s ease-out 1 forwards popup;
+}
+
+@keyframes popup {
+  from {
+    //visibility: visible;
+    opacity: 0%;
+    //transform: translateY(100%);
+  }
+  to {
+    //visibility: visible;
+    opacity: 100%;
+    //transform: translateY(0%);
+  }
+}
+
+/* Posts 
+ */
+.post {
+  text-align: justify;
 }

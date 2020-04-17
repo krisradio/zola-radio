@@ -16,21 +16,26 @@
 </div>
 
 
-{% set length = section.subsections | length -%}
+{% set len = section.subsections | length -%}
+{% set len = 6 %}
 {% for col in range(end=config.extra.section_col) -%}
-    Len: {{ length }}; Col: {{ col }};
-    {% set matched_i = range(end=length, start=col, step_by=config.extra.section_col) -%}
+    {% set matched_i = range(end=len, start=col, step_by=config.extra.section_col) -%}
+    <div class="column">
     {% for p in section.subsections -%}
-        {% if loop.index in matched_i %}
+        {% if loop.index0 in matched_i -%}
             {% set sub = get_section(path=p, metadata_only=true) -%}
-            <div class="sub section">
-            <div class="splash">
-                <h2 class="section"><a href="{{ sub.permalink }}">{{ sub.title }}</a></h2>
-                <span class="section">{{ sub.description }}</span>
-            </div>
-            </div>
+            <a href="{{ sub.permalink }}">
+                <div class="sub section">
+                    <h2>{{ sub.title }}</h2>
+                    <span class="hide">{{ sub.description }}</span>
+                </div>
+            </a>
         {% endif -%}
-    {% endfor %} 
+    {% endfor %}
+    </div>
 {% endfor -%}
 {% endblock content %}
 
+{% block scripts -%}
+<script src="/scripts/splash.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
