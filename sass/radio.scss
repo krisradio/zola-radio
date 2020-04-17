@@ -174,32 +174,11 @@ nav li:active { font-weight: bold; }
 }
 
 .sub > span {
-  position: relative;
-}
-
-.sub > span.hide {
   display: inline-block;
-  //transform: translateY(100%);
+  position: relative;
   overflow: none;
-  //visibility: hidden;
   opacity: 0%;
-}
-
-.sub > span.flash {
-  animation: 0.45s ease-out 1 forwards popup;
-}
-
-@keyframes popup {
-  from {
-    //visibility: visible;
-    opacity: 0%;
-    //transform: translateY(100%);
-  }
-  to {
-    //visibility: visible;
-    opacity: 100%;
-    //transform: translateY(0%);
-  }
+  transition: opacity 0.45s;
 }
 
 /* Posts 
