@@ -17,23 +17,24 @@
 
 
 {% set len = section.subsections | length -%}
-{% set len = 6 %}
-{% for col in range(end=config.extra.section_col) -%}
-    {% set matched_i = range(end=len, start=col, step_by=config.extra.section_col) -%}
-    <div class="column">
-    {% for p in section.subsections -%}
-        {% if loop.index0 in matched_i -%}
-            {% set sub = get_section(path=p, metadata_only=true) -%}
-            <a href="{{ sub.permalink }}">
-                <div class="sub section">
-                    <h2>{{ sub.title }}</h2>
-                    <span>{{ sub.description }}</span>
-                </div>
-            </a>
-        {% endif -%}
-    {% endfor %}
-    </div>
-{% endfor -%}
+{% if len > 0 -%}
+    {% for col in range(end=config.extra.section_col) -%}
+        {% set matched_i = range(end=len, start=col, step_by=config.extra.section_col) -%}
+        <div class="column">
+        {% for p in section.subsections -%}
+            {% if loop.index0 in matched_i -%}
+                {% set sub = get_section(path=p, metadata_only=true) -%}
+                <a href="{{ sub.permalink }}">
+                    <div class="sub section">
+                        <h2>{{ sub.title }}</h2>
+                        <span>{{ sub.description }}</span>
+                    </div>
+                </a>
+            {% endif -%}
+        {% endfor %}
+        </div>
+    {% endfor -%}
+{% endif -%}
 {% endblock content %}
 
 {% block scripts -%}
