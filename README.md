@@ -7,6 +7,9 @@ Radio features a versatile nav pane, menu bar, and main content area.
 
 - [Options](#options)
   - [Logo](#logo)
+  - [Nav Links](#nav-links)
+  - [Section Columns](#section-columns)
+  - [Page Columns](#page-columns)
 - [License](#license)
 
 ## Options
@@ -22,6 +25,35 @@ radio_logo = "/path/to/logo.svg"
 ```
 
 Note that radio currently scales the logo wildly, so an .svg or high-resolution image is recommended. 
+
+### Nav Links
+An array of links, to be displayed in the collapsible nav pane. 
+Note that the nav pane will, in the future, show the static site's entire tree -- so don't get too attached to these nav links. 
+
+```toml
+[extra]
+radio_nav_links = [
+    {url = "link1", name = "name1"},
+    {url = "link2", name = "name2"},
+]
+```
+
+### Section Columns
+For supersections, how many columns to display the pages of a subsection in.
+
+
+```toml
+[extra]
+section_col = 3
+```
+
+### Page Columns
+How many columns to display the top-level pages of sections and supersections in.
+
+```toml
+[extra]
+page_col = 2
+```
 
 ## License
 MIT License
