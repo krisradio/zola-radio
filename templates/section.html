@@ -2,39 +2,42 @@
 
 {% block content %}
 <div class="section">
-    <div class="splash">
-        <h1 class="section">{{ section.title }}</h1>
-    </div>
-    {{ section.content | safe }}
+    <h1>{{ section.title }}</h1>
+    <div>{{ section.content | safe }}</div>
+
+    {% set pageLen = section.pages | length -%}
     
-    {% for page in section.pages | sort(attribute="date") | reverse %}
-        <div class="splash">
-            <h3 class="page"><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
-            <span class="page">{{ page.description }}</span>
-        </div>
-    {% endfor %}
-</div>
-
-
-{% set len = section.subsections | length -%}
-{% if len > 0 -%}
-    {% for col in range(end=config.extra.section_col) -%}
-        {% set matched_i = range(end=len, start=col, step_by=config.extra.section_col) -%}
-        <div class="column">
-        {% for p in section.subsections -%}
+    {% set endCol = config.extra.radio_page_col -%}
+    {% if endCol > pageLen -%}
+        {% set endCol = pageLen -%}
+    {% endif %}
+    
+    {% set page_col = config.extra.radio_page_col -%}
+    {% set colClass = "column" -%}
+    {% if page_col == 2 %}
+        {% set colClass = "half column" -%}
+    {% elif page_col == 3 %}
+        {% set colClass = "third column" -%}
+    {% else %}
+        {% set colClass = "fourth column" -%}
+    {% endif %}
+    
+    {% for col in range(end=endCol) -%}
+        {% set matched_i = range(end=pageLen, start=col, step_by=page_col) -%}
+        <div class="{{ colClass }}">
+        {% for page in section.pages -%}
             {% if loop.index0 in matched_i -%}
-                {% set sub = get_section(path=p, metadata_only=true) -%}
-                <a href="{{ sub.permalink }}">
-                    <div class="sub section">
-                        <h2>{{ sub.title }}</h2>
-                        <span>{{ sub.description }}</span>
+                <a href="{{ page.permalink }}">
+                    <div class="sub page">
+                        <h3>{{ page.title }}</h3>
+                        <span>{{ page.description }}</span>
                     </div>
                 </a>
             {% endif -%}
         {% endfor %}
         </div>
     {% endfor -%}
-{% endif -%}
+</div>
 {% endblock content %}
 
 {% block scripts -%}

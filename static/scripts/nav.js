@@ -11,8 +11,6 @@
     var navLinks = document.querySelectorAll('nav a');
     var navToggleButton = document.getElementById("nav-toggle");
     
-    console.log(nav);
-    
     function shownav() {
         html.classList.remove('nav-hidden')
         html.classList.add('nav-visible');

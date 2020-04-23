@@ -148,11 +148,29 @@ nav li:active { font-weight: bold; }
 
 /* Sections 
  */
+ .section {
+  clear: both;
+}
+
 .column {
   box-sizing: border-box;
-  width: 30.33%;
-  margin: 0 1.5%;
   float: left;
+  margin: 0 2%;
+}
+
+.half {
+  width: 47%;
+  margin: 0 1.5%;
+}
+
+.third {
+  width: 31.33%;
+  margin: 0 1.0%;
+}
+
+.fourth {
+  width: 24%;
+  margin: 0 0.5%;
 }
 
 .column a {
@@ -167,7 +185,7 @@ nav li:active { font-weight: bold; }
   background-image: linear-gradient(#272727, #131516)
 }
 
-.sub > h2 {
+.sub > h2, .sub > h3 {
   position: relative;
   transition: top 0.3s;
   margin: 0em;

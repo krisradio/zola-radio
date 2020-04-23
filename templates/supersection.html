@@ -1,0 +1,57 @@
+{% extends "section.html" %}
+
+{% block content %}
+
+{{ super() }}
+
+{% set subLen = section.subsections | length -%}
+{% if subLen > 0 -%}
+    {% set page_col = config.extra.radio_section_col -%}
+
+    {% set colClass = "column" -%}
+    {% if page_col == 2 %}
+        {% set colClass = "half column" -%}
+    {% elif page_col == 3 %}
+        {% set colClass = "third column" -%}
+    {% else %}
+        {% set colClass = "fourth column" -%}
+    {% endif %}
+
+    {% for p in section.subsections -%}
+        {% set sub = get_section(path=p, metadata_only=false) -%}
+        <div class="section">
+            <a href="{{ sub.permalink }}">
+                <h2>{{ sub.title }}</h2>
+            </a>
+            <p>{{ sub.description | safe }}</p>
+        
+        {% set subPageLen = sub.pages | length -%}
+        
+        {% set endCol = config.extra.radio_section_col -%}
+        {% if endCol > subPageLen -%}
+            {% set endCol = subPageLen -%}
+        {% endif %}
+        
+        {% for col in range(end=endCol) -%}
+            {% set matched_i = range(end=subPageLen, start=col, step_by=page_col) -%}
+            <div class="{{ colClass }}">
+            {% for page in sub.pages -%}
+                {% if loop.index0 in matched_i -%}
+                    <a href="{{ page.permalink }}">
+                        <div class="sub page">
+                            <h3>{{ page.title }}</h3>
+                            <span>{{ page.description }}</span>
+                        </div>
+                    </a>
+                {% endif -%}
+            {% endfor %}
+            </div>
+        {% endfor -%}
+        </div>
+    {% endfor -%}
+{% endif -%}
+{% endblock %}
+
+{% block scripts -%}
+<script src="/scripts/splash.js" type="text/javascript" charset="utf-8"></script>
+{% endblock %}

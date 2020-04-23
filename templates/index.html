@@ -78,8 +78,11 @@
             {% endblock content %}
             </div>
         </div>
-        <script src="/scripts/nav.js" type="text/javascript" charset="utf-8"></script>
-        {% block scripts -%}
-        {% endblock -%}
+       
+      <!-- JS, loaded after document -->
+      <script src="/scripts/nav.js" type="text/javascript" charset="utf-8"></script>
+      {% block scripts -%}
+        <!-- Overwrite this block in a child template to load extra scripts. -->
+      {% endblock -%}
     </body>
 </html>

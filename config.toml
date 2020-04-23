@@ -9,3 +9,4 @@ radio_nav_links = [
     {url = "https://github.com/krisradio/zola-radio", name = "GitHub"},
 ]
 section_col = 3
+page_col = 2
