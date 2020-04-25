@@ -20,9 +20,9 @@
     {% for p in section.subsections -%}
         {% set sub = get_section(path=p, metadata_only=false) -%}
         <div class="section">
-            <a href="{{ sub.permalink }}">
-                <h2>{{ sub.title }}</h2>
-            </a>
+            <h2>
+                <a href="{{ sub.permalink }}">{{ sub.title }}</a>
+            </h2>
             <p>{{ sub.description | safe }}</p>
         
         {% set subPageLen = sub.pages | length -%}
@@ -50,8 +50,4 @@
         </div>
     {% endfor -%}
 {% endif -%}
-{% endblock %}
-
-{% block scripts -%}
-<script src="/scripts/splash.js" type="text/javascript" charset="utf-8"></script>
 {% endblock %}

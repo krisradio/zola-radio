@@ -194,8 +194,7 @@ nav li:active { font-weight: bold; }
 .sub > span {
   display: inline-block;
   position: relative;
-  overflow: none;
-  opacity: 0%;
+  opacity: 0;
   transition: opacity 0.45s;
 }
 

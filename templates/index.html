@@ -34,7 +34,7 @@
                 {% block nav_about %}
                 <div class="nav-about">
                     {% if config.extra.radio_logo != "" %}<img src="{{ config.extra.radio_logo }}" class="logo-img"/>{% endif %}
-                    {% if config.description != "" %}<p>{{ config.description }}</p>{% endif %}
+                    {% if config.description != "" %}<p>{{ config.description | safe }}</p>{% endif %}
                 </div>
                 {% endblock nav_about %}
             </nav>
@@ -53,7 +53,7 @@
             
             <div id="content">
                 <!-- idea: move search to menu bar -->
-                <div id="search-wrapper" class="hidden">
+                <!--<div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
                         <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
@@ -62,12 +62,33 @@
                         <ul id="searchresults">
                         </ul>
                     </div>
-                </div>
-
+                </div>-->
+            
             {% block content %}
-                {% for page in section.pages | sort(attribute="date") | reverse %}
+            <h1>{{ section.title }}</h1>
+            {{ section.content | safe }}
+            
+            {% if config.extra.radio_index_splash != "" %}<img src="{{ config.extra.radio_index_splash }}"/>{% endif %}            
+            
+            
+            <h1>Recent Updates:</h1>
+                {% set_global all_pages = [] -%}
+                {% set_global all_sections = [] -%}
+                
+                {% for p in section.subsections -%}
+                    {% set sub = get_section(path=p) -%}
+                    {% set_global all_pages = all_pages | concat(with=sub.pages) -%}
+                    {% set_global all_sections = all_sections | concat(with=sub.subsections) -%}
+                {% endfor %}
+                
+                {% for p in all_sections -%}
+                    {% set sub = get_section(path=p) -%}
+                    {% set_global all_pages = all_pages | concat(with=sub.pages) %}
+                {% endfor %}
+                
+                {% for page in all_pages | sort(attribute="date") | reverse -%}
                   <div class="post">
-                    <h1 class="post-title">
+                    <h2 class="post-title">
                       <a href="{{ page.permalink }}">
                         {{ page.title }}
                       </a>
